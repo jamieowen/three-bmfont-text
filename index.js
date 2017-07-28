@@ -1,13 +1,19 @@
 var createLayout = require('layout-bmfont-text')
 var inherits = require('inherits')
 var createIndices = require('quad-indices')
-var buffer = require('three-buffer-vertex-data')
+var buffer = require('./three-buffer-vertex-data')
 var assign = require('object-assign')
 
 var vertices = require('./lib/vertices')
 var utils = require('./lib/utils')
 
-var Base = THREE.BufferGeometry
+import {
+    BufferGeometry as Base,
+    Sphere,
+    Box3
+} from 'three';
+
+//var Base = THREE.BufferGeometry
 
 module.exports = function createTextGeometry (opt) {
   return new TextGeometry(opt)
@@ -90,7 +96,7 @@ TextGeometry.prototype.update = function (opt) {
 
 TextGeometry.prototype.computeBoundingSphere = function () {
   if (this.boundingSphere === null) {
-    this.boundingSphere = new THREE.Sphere()
+    this.boundingSphere = new Sphere()
   }
 
   var positions = this.attributes.position.array
@@ -110,7 +116,7 @@ TextGeometry.prototype.computeBoundingSphere = function () {
 
 TextGeometry.prototype.computeBoundingBox = function () {
   if (this.boundingBox === null) {
-    this.boundingBox = new THREE.Box3()
+    this.boundingBox = new Box3()
   }
 
   var bbox = this.boundingBox
